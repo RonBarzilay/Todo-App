@@ -1,14 +1,40 @@
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { useState } from "react";
+import { StyleSheet, View, Button, TextInput, FlatList } from "react-native";
+
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
+  const [enteredGoalText, setGoal] = useState("");
+  const [goalsList, setGoalsList] = useState("");
+
+  function goalTextInputHandler(enteredText) {
+    setGoal(enteredText);
+  }
+
+  function addGoalHandler() {
+    setGoalsList((currentGoalsList) => [
+      ...currentGoalsList,
+      { text: enteredGoalText, key: Math.random().toString() },
+    ]);
+  }
+
   return (
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} placeholder='Here goes the goal'/>
-        <Button title='Add Goal'/>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Here goes the goal"
+          onChangeText={goalTextInputHandler}
+        />
+        <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalContainer}>
-        <Text>List of goals later on ...</Text>
+        <FlatList
+          data={goalsList}
+          renderItem={(itemData) => {
+            return <GoalItem />;
+          }}
+        />
       </View>
     </View>
   );
@@ -19,24 +45,25 @@ const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
     padding: 50,
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   inputContainer: {
-  // flex: 1/6, inputContainer:goalContainer
+    // flex: 1/6, inputContainer:goalContainer
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 24,
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    borderBottomColor: "#cccccc",
   },
   textInput: {
     borderWidth: 1,
-    padding: 10, 
-    borderColor: '#cccccc',
-    width: '70%',
-    marginRight: 8
+    padding: 10,
+    borderColor: "#cccccc",
+    width: "70%",
+    marginRight: 8,
+    borderRadius: 6,
   },
   // flex: 5/6, goalContainer:inputContainer
   goalContainer: {

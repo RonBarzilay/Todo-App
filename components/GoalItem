@@ -1,0 +1,24 @@
+import { StyleSheet } from "react-native";
+import App from "../App";
+
+
+function GoalItem() {
+  return
+  <View styles={styles.goalItem}>
+      <Text styles={styles.goalText}>{itemData.item.text}</Text>
+  </View>
+}
+
+export default GoalItem;
+
+const styles = StyleSheet.create({
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: "#5e0acc", // background c
+  },
+  goalText: {
+    color: "white", // text c
+  },
+});
