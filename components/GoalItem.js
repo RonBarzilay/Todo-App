@@ -1,12 +1,12 @@
-import { StyleSheet } from "react-native";
-import App from "../App";
+import { StyleSheet, View, Text} from "react-native";
 
 
-function GoalItem() {
-  return
-  <View styles={styles.goalItem}>
-      <Text styles={styles.goalText}>{itemData.item.text}</Text>
-  </View>
+function GoalItem(props) {
+  return (
+    <View style={styles.goalItem}>
+      <Text style={styles.goalText}>{props.text}</Text>
+    </View>
+  );
 }
 
 export default GoalItem;
