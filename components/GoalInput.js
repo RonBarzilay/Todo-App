@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
 
 function GoalInput(props) {
+  // Manage Text Input, enteredGoalText: value,
+  // setEnteredGoalText: call to set
   const [enteredGoalText, setEnteredGoalText] = useState("");
 
   function goalTextInputHandler(enteredText) {
@@ -14,15 +16,25 @@ function GoalInput(props) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Here goes the goal"
-        onChangeText={goalTextInputHandler}
-        value={enteredGoalText}
-      />
-      <Button title="Add Goal" onPress={addGoalHandler} />
-    </View>
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Here goes the goal"
+          placeholderTextColor="#ccccc1"
+          onChangeText={goalTextInputHandler}
+          value={enteredGoalText}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Add Goal" onPress={addGoalHandler} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={props.onCnacel} />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
@@ -32,8 +44,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     // flex: 1/6, inputContainer:goalContainer
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    padding: 16,
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
     borderBottomWidth: 1,
@@ -43,8 +55,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
+    width: "100%",
     borderRadius: 6,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    marginTop: 16,
+  },
+  button: {
+    width: 100,
+    marginHorizontal: 8,
   },
 });
