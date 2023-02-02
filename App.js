@@ -22,7 +22,7 @@ export default function App() {
   function addGoalHandler(enteredGoalText) {
     setGoalsList((currentGoalsList) => [
       ...currentGoalsList,
-      { text: enteredGoalText, key: Math.random().toString() },
+      { text: enteredGoalText, id: Math.random().toString() },
     ]);
     endAddGoalHandler();
   }
